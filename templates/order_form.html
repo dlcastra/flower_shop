@@ -1,0 +1,49 @@
+{% load bootstrap5 %}
+{% bootstrap_css %}
+{% bootstrap_javascript %}
+
+<style>
+    .custom-card {
+        width: 600px;
+        height: 685px;
+        margin-bottom: 20px;
+        padding: 20px;
+        border-radius: 15px;
+        background-color: #fff;
+        box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+    }
+
+    .custom-btn {
+        width: 150px;
+        height: 40px;
+        font-size: 18px;
+    }
+</style>
+
+<section style="background-color: #f8f9fa">
+    <div class="mask d-flex align-items-center h-100 gradient-custom-3">
+        <div class="container h-100">
+            <div class="row d-flex justify-content-center align-items-center h-100">
+                <div class="col-12 col-md-9 col-lg-7 col-xl-6">
+                    <div class="card custom-card">
+                        <div class="card-body p-5">
+                            <h2 class="text-uppercase text-center mb-5">Order Form</h2>
+
+                            <form action="" method="post">
+                                {% csrf_token %}
+                                {% bootstrap_form form %}
+                                <br>
+                                <div class="d-flex justify-content-between">
+                                    <a href="{% url 'get_all_flowers' %}" class="btn btn-danger custom-btn">Cancel order</a>
+                                    {% buttons %}
+                                        <input type="submit" class="btn btn-success custom-btn" value="Submit order">
+                                    {% endbuttons %}
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

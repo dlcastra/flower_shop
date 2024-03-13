@@ -1,0 +1,74 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% load bootstrap5 %}
+    {% bootstrap_css %}
+    {% bootstrap_javascript %}
+    <style>
+        body {
+            background-color: #f8f9fa;
+            color: #212529;
+            padding-top: 20px;
+        }
+
+        .flower-card {
+            width: 400px;
+            height: 420px;
+            margin-bottom: 20px;
+            padding: 20px;
+            border-radius: 15px;
+            background-color: #fff;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .custom-img {
+            width: 358px;
+            height: auto;
+        }
+
+
+        .flower-card button {
+            width: 100%;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h1 class="text-center mb-4">Welcome to Flower Store</h1>
+    <div class="row">
+        {% for flower in flowers %}
+            <div class="col-md-4">
+                <div class="flower-card">
+                    <strong>ID:</strong> {{ flower.id }}<br>
+                    <strong>Name:</strong> {{ flower.name }}<br>
+                    <strong>Color:</strong> {{ flower.color }}<br>
+                    <strong>Passport:</strong> {{ flower.passport_number }}<br>
+                    <strong>Fertilizer name:</strong> {{ flower.fertilizer.name }}<br>
+                    <strong>Fertilizer code:</strong> {{ flower.fertilizer.code }}<br>
+                    <br>
+                    {% if flower.image %}
+                        <img src="{{ flower.image.url }}" alt="{{ flower.name }}" class="custom-img">
+                    {% else %}
+                        <p>No Image Available</p>
+                    {% endif %}
+                    <br>
+                    <form action="{% url 'order_flower' flower.id %}" method="post">
+                        {% csrf_token %}
+                        <button type="submit" class="btn btn-primary mt-3">Order</button>
+                    </form>
+
+                </div>
+            </div>
+            {% if forloop.counter|divisibleby:3 and not forloop.last %}
+                </div>
+                <div class="row">
+            {% endif %}
+        {% endfor %}
+        </div>
+</div>
+
+
+</body>
+</html>

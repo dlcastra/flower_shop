@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Order Success</title>
+    {% load bootstrap5 %}
+    {% bootstrap_css %}
+    {% bootstrap_javascript %}
+    <style>
+        body, html {
+            height: 100%;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .container {
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h1>Order Placed Successfully!</h1>
+    <form action="{% url 'get_all_flowers' %}" method="get">
+        {% csrf_token %}
+        <button type="submit" class="btn btn-primary mt-3">Back to Flower List</button>
+    </form>
+</div>
+</body>
+</html>
